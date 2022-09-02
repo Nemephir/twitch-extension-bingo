@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Viewer Page</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body style="font-size:40px;">
+    <div class="grid" id="grid"></div>
+
+    <script src="https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js"></script>
+    <script src="./src/Grid.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+	        new Grid()
+        }
+    </script>
+</body>
+</html>
