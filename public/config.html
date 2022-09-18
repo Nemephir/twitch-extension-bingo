@@ -5,9 +5,11 @@
     <link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
 <body>
-<div class="extension">
+<div class="extension" id="app">
     <div class="settings">
-        Size grid : <input type="number" id="sizeSetting" />
+        Grid Size : <input type="number" id="sizeSetting"/>
+        <br/>
+        <button type="button" id="save">Enregistrer</button>
     </div>
     <div class="grid" id="grid"></div>
 </div>
@@ -15,19 +17,59 @@
 
 <script src="https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js"></script>
 <script src="./src/Grid.js"></script>
+<script src="http://localhost:7402/socket.io/socket.io.js"></script>
 <script type="text/javascript">
-	window.onload = function() {
-		const sizeSettingEl = document.getElementById('sizeSetting')
+	const socket = io()
+	const twitch = window.Twitch.ext
 
-		let grid = new Grid( true )
+	let channelId = undefined
+	let userId    = undefined
 
-        // Size Settings
-		sizeSettingEl.value = grid.getSetting( 'size', 3 )
-        sizeSettingEl.addEventListener('input', () => {
-	        grid.setSetting( 'size', Number(sizeSettingEl.value) )
-	        console.log( grid )
-        })
+	window.onload = () => {
+		socket.on( 'grid', initGrid )
+		twitch.onContext( initTwitchContext )
+		twitch.onAuthorized( initTwitchAuthorized )
 	}
+
+	const initTwitchContext = ( context ) => {
+		// console.log( context )
+	}
+
+	const initTwitchAuthorized = ( auth ) => {
+		channelId = auth.channelId
+		userId    = auth.userId
+		socket.emit( 'grid.load', channelId )
+	}
+
+	const initGrid = ( gridData ) => {
+		console.log( gridData )
+		let grid = new Grid( true )
+			.setId( gridData._id )
+			.setChannel( gridData.channel )
+			.setSize( gridData.size )
+			.setCells( gridData.cells )
+			.render()
+
+		// Size Settings
+		const sizeSettingEl = document.getElementById( 'sizeSetting' )
+		sizeSettingEl.value = grid.size
+		sizeSettingEl.addEventListener( 'input', () => {
+			grid.setSize( Number( sizeSettingEl.value ) )
+		} )
+
+		// Save button
+		const saveEl = document.getElementById( 'save' )
+		saveEl.addEventListener( 'click', () => {
+			let data = {
+				_id    : grid.id,
+				channel: gridData.channel,
+				size   : grid.size,
+				cells  : grid.cells
+			}
+			socket.emit( 'grid.save', data )
+		} )
+	}
+
 </script>
 </body>
 

@@ -1,67 +1,42 @@
 class Grid {
 
 	updatingMode = false
+	id           = 0
+	channel      = null
+	size         = 1
 	settings     = {
-		size: 3
+		size: 1
 	}
 	cells        = [
 		{
-			content: 'Test 1',
-			checked: false
-		},
-		{
-			content: 'Test 2',
-			checked: false
-		},
-		{
-			content: 'Test 3',
-			checked: false
-		},
-		{
-			content: 'Test 4',
-			checked: true
-		},
-		{
-			content: 'Test 5',
-			checked: false
-		},
-		{
-			content: 'Test 6',
-			checked: false
-		},
-		{
-			content: 'Test 7',
-			checked: false
-		},
-		{
-			content: 'Test 8',
-			checked: false
-		},
-		{
-			content: 'Test 9',
+			content: '--',
 			checked: false
 		}
 	]
 
 	constructor( enabledUpdatingMode = false ) {
 		this.updatingMode = enabledUpdatingMode
-		this.render()
 	}
 
-	getSetting( key, defaultValue = null ) {
-		return this.settings[key] !== undefined
-			? this.settings[key]
-			: defaultValue
+	setId( id ) {
+		this.id = id
+		return this
 	}
 
-	setSetting( key, value ) {
-		switch( key ) {
-			case 'size':
-				this.setCellsNumber( value, this.settings[key] )
-				break
-		}
-		this.settings[key] = value
-		this.render()
+	setChannel( channelId ) {
+		this.channel = channelId
+		return this
+	}
+
+	setSize( size ) {
+		this.setCellsNumber( size, this.size )
+		this.size = size
+		return this
+	}
+
+	setCells( cells ) {
+		this.cells = cells
+		return this
 	}
 
 	setCellsNumber( newValue, oldValue ) {
@@ -70,7 +45,7 @@ class Grid {
 
 			for( let r = 0 ; r < oldValue ; r++ ) {
 				for( let i = 0 ; i < delta ; i++ ) {
-					this.cells.splice( r*newValue+oldValue, 0, this.getDefaultCell() )
+					this.cells.splice( r * newValue + oldValue, 0, this.getDefaultCell() )
 				}
 			}
 
@@ -82,11 +57,12 @@ class Grid {
 			let delta = oldValue - newValue
 
 			for( let r = 0 ; r < oldValue ; r++ ) {
-				this.cells.splice( r*newValue+newValue, delta )
+				this.cells.splice( r * newValue + newValue, delta )
 			}
 
-			this.cells.splice( newValue*newValue, delta*oldValue )
+			this.cells.splice( newValue * newValue, delta * oldValue )
 		}
+		return this
 	}
 
 	resetHtml() {
@@ -101,7 +77,7 @@ class Grid {
 	}
 
 	render() {
-		const size   = this.getSetting( 'size', 3 )
+		const size   = this.size || 3
 		const gridEl = this.getElement()
 
 		// reset grid
@@ -125,6 +101,8 @@ class Grid {
 				row.appendChild( this.createCellHtml( cellNumber ) )
 			}
 		}
+
+		return this
 	}
 
 	createRowHtml() {
@@ -143,6 +121,7 @@ class Grid {
 		if( this.updatingMode ) {
 			let textarea   = document.createElement( 'textarea' )
 			textarea.value = content
+			textarea.addEventListener('input', (e) => this.cells[cellNumber].content = e.target.value)
 			cell.appendChild( textarea )
 		}
 		else {

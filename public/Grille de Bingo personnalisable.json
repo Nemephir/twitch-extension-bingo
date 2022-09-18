@@ -19,50 +19,6 @@
       },
       "id": "1",
       "isPopout": false,
-      "label": "Streameur",
-      "linked": false,
-      "linkedUserId": "",
-      "orientation": "Portrait",
-      "type": "component",
-      "viewerType": "Broadcaster"
-    },
-    {
-      "channelId": "87703288",
-      "configurationAnchor": "component",
-      "displayChannelName": "nemephir",
-      "features": {
-        "isBitsEnabled": false,
-        "isChatEnabled": false,
-        "isSubscriptionStatusAvailable": false
-      },
-      "frameSize": {
-        "width": 1280,
-        "height": 720
-      },
-      "id": "2",
-      "isPopout": false,
-      "label": "Utilisateur",
-      "linked": false,
-      "linkedUserId": "",
-      "orientation": "Portrait",
-      "type": "component",
-      "viewerType": "Logged-In Viewer"
-    },
-    {
-      "channelId": "87703288",
-      "configurationAnchor": "component",
-      "displayChannelName": "nemephir",
-      "features": {
-        "isBitsEnabled": false,
-        "isChatEnabled": false,
-        "isSubscriptionStatusAvailable": false
-      },
-      "frameSize": {
-        "width": 1280,
-        "height": 720
-      },
-      "id": "3",
-      "isPopout": false,
       "label": "Configuration",
       "linked": true,
       "linkedUserId": "265737932",
@@ -77,7 +33,7 @@
     "authorName": "Nemephir",
     "bitsEnabled": false,
     "canInstall": true,
-    "configUrl": "https://localhost:8080/config.html",
+    "configUrl": "http://localhost:7402/config.html",
     "configurationLocation": "none",
     "description": "",
     "eulaTosUrl": "",
@@ -103,11 +59,11 @@
     "viewerSummary": "",
     "viewerUrl": "",
     "viewerUrls": {
-      "component": "https://localhost:8080/video_component.html"
+      "component": "http://localhost:7402/video_component.html"
     },
     "views": {
       "component": {
-        "viewerUrl": "https://localhost:8080/video_component.html",
+        "viewerUrl": "http://localhost:7402/video_component.html",
         "aspectWidth": 0,
         "aspectHeight": 0,
         "aspectRatioX": 300,
@@ -121,7 +77,7 @@
         "autoScale": true
       },
       "config": {
-        "viewerUrl": "https://localhost:8080/config.html",
+        "viewerUrl": "http://localhost:7402/config.html",
         "canLinkExternalContent": false
       }
     },
@@ -129,7 +85,7 @@
     "whitelistedPanelUrls": []
   },
   "frontendCommand": "",
-  "frontendFolderName": "public",
+  "frontendFolderName": "W:\\twitch-extension-bingo\\public",
   "name": "Grille de Bingo personnalisable",
   "usingRandomFrontendHostingPort": false,
   "version": 3
