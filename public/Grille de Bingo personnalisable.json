@@ -79,14 +79,18 @@
     "canInstall": true,
     "configUrl": "http://localhost:7402/config.html",
     "configurationLocation": "none",
-    "description": "",
+    "description": "The streamer creates his bingo grid. Among the options, it is possible to choose the size of the grid (between 2 and 5 squares), as well as the text content of each option.\nThe viewers have access, thanks to the plugin, to the bingo grid created by the streamer. As soon as the streamer checks or unchecks a option, the update is automatically done on the viewer page.\n\nThe data goes through an external server, not requiring registration. The data is secured by the streamer's Twitch channel ID, combined with the security of Twitch's extension framework; preventing the use of a bingo grid that does not belong to the right streamer, or blocking its modification by someone other than the streamer himself.",
     "eulaTosUrl": "",
     "hasChatSupport": false,
-    "iconUrl": "",
-    "iconUrls": {},
+    "iconUrl": "https://extensions-discovery-images.twitch.tv/m6mr8lnbvijofa412gbl7oai5c6unj/0.0.1/logofebba986-5ab1-4b02-bf45-8cd7b94d3328",
+    "iconUrls": {
+      "100x100": "https://extensions-discovery-images.twitch.tv/m6mr8lnbvijofa412gbl7oai5c6unj/0.0.1/logofebba986-5ab1-4b02-bf45-8cd7b94d3328",
+      "24x24": "https://extensions-discovery-images.twitch.tv/m6mr8lnbvijofa412gbl7oai5c6unj/0.0.1/taskbarc0d93834-6238-4ca7-a22f-2519c0e50e72",
+      "300x200": "https://extensions-discovery-images.twitch.tv/m6mr8lnbvijofa412gbl7oai5c6unj/0.0.1/discovery35c71d9b-5d1b-4ef7-b6a3-7890a0de3fa3"
+    },
     "id": "m6mr8lnbvijofa412gbl7oai5c6unj",
     "installationCount": -42,
-    "liveConfigUrl": "",
+    "liveConfigUrl": "http://localhost:7402/config.html",
     "name": "Grille de Bingo personnalisable",
     "panelHeight": 0,
     "privacyPolicyUrl": "",
@@ -96,7 +100,7 @@
     "sku": "",
     "state": "Testing",
     "subscriptionsSupportLevel": "none",
-    "summary": "",
+    "summary": "Create a custom from 2x2 to 5x5 box bingo grid. Fill in the content of the boxes you want and share it with your viewers.",
     "supportEmail": "nemephir@gmail.com",
     "vendorCode": "",
     "version": "0.0.1",
@@ -110,10 +114,10 @@
         "viewerUrl": "http://localhost:7402/video_component.html",
         "aspectWidth": 0,
         "aspectHeight": 0,
-        "aspectRatioX": 300,
-        "aspectRatioY": 200,
+        "aspectRatioX": 100,
+        "aspectRatioY": 100,
         "scalePixels": 1024,
-        "targetHeight": 4000,
+        "targetHeight": 10000,
         "size": 0,
         "zoom": false,
         "zoomPixels": 0,
@@ -121,6 +125,10 @@
         "autoScale": true
       },
       "config": {
+        "viewerUrl": "http://localhost:7402/config.html",
+        "canLinkExternalContent": false
+      },
+      "liveConfig": {
         "viewerUrl": "http://localhost:7402/config.html",
         "canLinkExternalContent": false
       }

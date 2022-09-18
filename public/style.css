@@ -16,6 +16,10 @@ html, body {
     width: 100%;
     height: 100%;
 }
+.extension {
+    padding: 15px;
+    background: #f1f1f1;
+}
 .settings + .grid.updatable {
     width: 600px;
     height: 600px;
@@ -78,6 +82,7 @@ html, body {
     border-radius: 3px;
     outline: none;
     padding: 6px 8px;
+    cursor: pointer;
 }
 .settings + .grid .cell:before {
     background: #d6d6d6;

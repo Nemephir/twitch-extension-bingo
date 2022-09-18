@@ -66,11 +66,11 @@
             } )
 
             // Moderator settings
-            const moderatorSettingEl   = document.getElementById( 'moderatorSetting' )
-            moderatorSettingEl.checked = grid.moderator
-            moderatorSettingEl.addEventListener( 'change', () => {
-                grid.setModerator( moderatorSettingEl.checked )
-            } )
+            // const moderatorSettingEl   = document.getElementById( 'moderatorSetting' )
+            // moderatorSettingEl.checked = grid.moderator
+            // moderatorSettingEl.addEventListener( 'change', () => {
+            //     grid.setModerator( moderatorSettingEl.checked )
+            // } )
 
             // Save button
             const saveEl = document.getElementById( 'saveButton' )
@@ -82,7 +82,6 @@
                     moderator: grid.moderator,
                     cells    : grid.cells
                 }
-                console.log( data )
                 socket.emit( 'grid.save', data )
             } )
 
