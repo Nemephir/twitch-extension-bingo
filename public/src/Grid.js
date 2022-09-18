@@ -4,9 +4,7 @@ class Grid {
 	id           = 0
 	channel      = null
 	size         = 1
-	settings     = {
-		size: 1
-	}
+	moderator    = false
 	cells        = [
 		{
 			content: '--',
@@ -31,6 +29,11 @@ class Grid {
 	setSize( size ) {
 		this.setCellsNumber( size, this.size )
 		this.size = size
+		return this
+	}
+
+	setModerator( moderator ) {
+		this.moderator = moderator
 		return this
 	}
 

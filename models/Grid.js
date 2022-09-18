@@ -1,19 +1,23 @@
 const mongoose = require( 'mongoose' )
 
 const schema = new mongoose.Schema( {
-	channel: {
+	channel  : {
 		type    : String,
 		required: true
 	},
-	name   : {
+	name     : {
 		type   : String,
 		default: 'Default'
 	},
-	size   : {
+	size     : {
 		type   : Number,
 		default: 3
 	},
-	cells  : {
+	moderator: {
+		type   : Boolean,
+		default: false
+	},
+	cells    : {
 		type   : [ { content: String, checked: Boolean } ],
 		default: [
 			{ content: '', checked: false },

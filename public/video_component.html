@@ -28,13 +28,13 @@
 	    }
 
 	    const initTwitchAuthorized = ( auth ) => {
+		    console.log( auth )
 		    channelId = auth.channelId
 		    userId    = auth.userId
 		    socket.emit( 'grid.load', channelId )
 	    }
 
 	    const initGrid = ( gridData ) => {
-		    console.log( gridData )
 		    let grid = new Grid( false )
 			    .setId( gridData._id )
 			    .setChannel( gridData.channel )

@@ -47,6 +47,8 @@ const saveGrid = async ( socket, data ) => {
 	if( one ) {
 		if( data.size )
 			one.size = Number( data.size )
+		if( data.moderator !== undefined )
+			one.moderator = !!data.moderator
 		if( data.cells )
 			one.cells = data.cells
 
