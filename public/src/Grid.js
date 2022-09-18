@@ -121,7 +121,7 @@ class Grid {
 		if( this.updatingMode ) {
 			let textarea   = document.createElement( 'textarea' )
 			textarea.value = content
-			textarea.addEventListener('input', (e) => this.cells[cellNumber].content = e.target.value)
+			textarea.addEventListener( 'input', ( e ) => this.cells[cellNumber].content = e.target.value )
 			cell.appendChild( textarea )
 		}
 		else {
@@ -135,7 +135,8 @@ class Grid {
 			if( this.isBroadcaster() ) {
 				cell.addEventListener( 'click', () => {
 					this.cells[cellNumber].checked = ! checked
-					this.render()
+					socket.emit( 'grid.check', this.id, this.channel, cellNumber, ! checked )
+					// this.render()
 				} )
 			}
 		}

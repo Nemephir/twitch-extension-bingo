@@ -9,10 +9,39 @@
 
     <script src="https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js"></script>
     <script src="./src/Grid.js"></script>
+    <script src="http://localhost:7402/socket.io/socket.io.js"></script>
     <script type="text/javascript">
-        window.onload = function() {
-	        new Grid()
-        }
+	    const socket = io()
+	    const twitch = window.Twitch.ext
+
+	    let channelId = undefined
+	    let userId    = undefined
+
+	    window.onload = () => {
+		    socket.on( 'grid', initGrid )
+		    twitch.onContext( initTwitchContext )
+		    twitch.onAuthorized( initTwitchAuthorized )
+	    }
+
+	    const initTwitchContext = ( context ) => {
+		    // console.log( context )
+	    }
+
+	    const initTwitchAuthorized = ( auth ) => {
+		    channelId = auth.channelId
+		    userId    = auth.userId
+		    socket.emit( 'grid.load', channelId )
+	    }
+
+	    const initGrid = ( gridData ) => {
+		    console.log( gridData )
+		    let grid = new Grid( false )
+			    .setId( gridData._id )
+			    .setChannel( gridData.channel )
+			    .setSize( gridData.size )
+			    .setCells( gridData.cells )
+			    .render()
+	    }
     </script>
 </body>
 </html>

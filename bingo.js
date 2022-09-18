@@ -24,12 +24,17 @@ app.use( express.static( 'public' ) )
 
 io.on( 'connection', async ( socket ) => {
 	socket.on( 'grid.load', ( channelId ) => loadGrid( socket, channelId ) )
-	socket.on( 'grid.save', ( gridId, channelId, data ) => saveGrid( socket, gridId, channelId, data ) )
+	socket.on( 'grid.save', ( data ) => saveGrid( socket, data ) )
+	socket.on(
+		'grid.check',
+		( gridId, channelId, cellNumber, checked ) => checkCell( socket, gridId, channelId, cellNumber, checked )
+	)
 } )
 
 server.listen( Number( process.env.PORT ) )
 
 const loadGrid = async ( socket, channelId ) => {
+	socket.join( channelId )
 	let one = await Grid.findOne( { channel: channelId } )
 	if( ! one )
 		one = await Grid.create( { channel: channelId } )
@@ -46,6 +51,16 @@ const saveGrid = async ( socket, data ) => {
 			one.cells = data.cells
 
 		await one.save()
-		socket.broadcast.emit( 'grid', one.toObject() )
+		io.to(data.channel).emit( 'grid', one.toObject() )
+	}
+}
+
+const checkCell = async ( socket, gridId, channelId, cellNumber, checked ) => {
+	let one = await Grid.findOne( { channel: channelId, _id: gridId } )
+	if( one ) {
+		one.cells[cellNumber].checked = checked
+		await one.save()
+		console.log( socket.broadcast )
+		io.to(channelId).emit( 'grid', one.toObject() )
 	}
 }

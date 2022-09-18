@@ -25,6 +25,50 @@
       "orientation": "Portrait",
       "type": "config",
       "viewerType": "Broadcaster"
+    },
+    {
+      "channelId": "87703288",
+      "configurationAnchor": "component",
+      "displayChannelName": "nemephir",
+      "features": {
+        "isBitsEnabled": false,
+        "isChatEnabled": false,
+        "isSubscriptionStatusAvailable": false
+      },
+      "frameSize": {
+        "width": 1280,
+        "height": 720
+      },
+      "id": "2",
+      "isPopout": false,
+      "label": "Streameur",
+      "linked": false,
+      "linkedUserId": "",
+      "orientation": "Portrait",
+      "type": "component",
+      "viewerType": "Broadcaster"
+    },
+    {
+      "channelId": "87703288",
+      "configurationAnchor": "component",
+      "displayChannelName": "nemephir",
+      "features": {
+        "isBitsEnabled": false,
+        "isChatEnabled": false,
+        "isSubscriptionStatusAvailable": false
+      },
+      "frameSize": {
+        "width": 1280,
+        "height": 720
+      },
+      "id": "3",
+      "isPopout": false,
+      "label": "Viewer",
+      "linked": false,
+      "linkedUserId": "",
+      "orientation": "Portrait",
+      "type": "component",
+      "viewerType": "Logged-In Viewer"
     }
   ],
   "manifest": {
