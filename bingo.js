@@ -14,10 +14,10 @@ console.log( 'PRODUCTION', !!process.env.PRODUCTION )
 
 const app    = express()
 const server = !!process.env.PRODUCTION
-	? http.createServer( app, {
+	? https.createServer( {
 		certificate: fs.readFileSync( process.env.SSL_CERTIFICATE_PATH ).toString(),
 		key        : fs.readFileSync( process.env.SSL_PRIVATE_KEY_PATH ).toString()
-	} )
+	}, app )
 	: http.createServer( app )
 const io     = new SocketIo.Server( server )
 
