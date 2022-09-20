@@ -55,7 +55,7 @@ io.on( 'connection', async ( socket ) => {
 	)
 } )
 
-server.listen( Number( process.env.PORT ), ( err ) => {
+app.listen( Number( process.env.PORT ), ( err ) => {
 	if( err ) console.log( err )
 	else console.log( `Listen on  port ${process.env.PORT}` )
 } )
