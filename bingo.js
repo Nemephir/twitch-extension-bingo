@@ -33,6 +33,7 @@ const allowedOrigins = [ `https://${process.env.TWITCH_EXTENSION_ID}.ext-twitch.
 console.log( allowedOrigins )
 app.use( (req, res, next) => {
 	res.setHeader('Access-Control-Allow-Origin', allowedOrigins[0]);
+	next()
 })
 
 app.get( '/', ( req, res ) => {
