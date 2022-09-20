@@ -12,7 +12,7 @@ const Grid = require( './models/Grid' )
 
 console.log( 'PRODUCTION', !!process.env.PRODUCTION )
 
-const app    = express.createServer()
+const app    = express()
 const server = !!process.env.PRODUCTION
 	? http.createServer( app, {
 		certificate: fs.readFileSync( process.env.SSL_CERTIFICATE_PATH ).toString(),
@@ -52,7 +52,6 @@ app.get( '/', ( req, res ) => {
 server.listen( Number( process.env.PORT ), ( err ) => {
 	if( err ) console.log( err )
 	else console.log( `Listen on  port ${process.env.PORT}` )
-	console.log( server )
 } )
 
 io.on( 'connection', async ( socket ) => {
