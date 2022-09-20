@@ -32,6 +32,8 @@ mongoose.connect( process.env.DB_URL, {
 } )
 
 app.use( express.static( 'public' ) )
+// app.use(Sentry.Handlers.requestHandler())
+app.use(cors({ credentials: true, origin: true }))
 // app.use( ( req, res, next ) => {
 // 	res.append( 'Access-Control-Allow-Origin', [ '*' ] )
 // 	res.append( 'Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE' )
