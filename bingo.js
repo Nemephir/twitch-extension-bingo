@@ -23,7 +23,13 @@ mongoose.connect( process.env.DB_URL, {
 
 app.use( express.static( 'public' ) )
 app.use(twitchextensioncsp({
-	clientID: 'm6mr8lnbvijofa412gbl7oai5c6unj'
+	clientID: 'm6mr8lnbvijofa412gbl7oai5c6unj',
+	scriptSrc: [
+		'https://bingo.twitch.nemephir.com/socket.io/socket.io.js'
+	],
+	connectSrc: [
+		'https://bingo.twitch.nemephir.com'
+	]
 }));
 
 io.on( 'connection', async ( socket ) => {
