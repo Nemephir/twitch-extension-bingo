@@ -2,7 +2,6 @@ require( 'dotenv' ).config()
 const fs = require( 'fs' )
 
 const mongoose = require( 'mongoose' )
-const cors     = require( 'cors' )
 const express  = require( 'express' )
 const https    = require( 'https' )
 const http     = require( 'http' )
