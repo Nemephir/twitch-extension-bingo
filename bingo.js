@@ -16,8 +16,8 @@ console.log( 'PRODUCTION', !!process.env.PRODUCTION )
 const app    = express()
 const server = !!process.env.PRODUCTION
 	? https.createServer( {
-		cert: fs.readFileSync( './file.pem' ).toString(),
-		key : fs.readFileSync( './file.crt' ).toString()
+		cert: fs.readFileSync( './file.pem' ),
+		key : fs.readFileSync( './file.crt' )
 	}, app )
 	: http.createServer( app )
 const io     = new SocketIo.Server( server )
