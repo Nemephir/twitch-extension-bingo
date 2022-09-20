@@ -12,9 +12,9 @@ const Grid = require( './models/Grid' )
 
 console.log( 'PRODUCTION', !!process.env.PRODUCTION )
 
-const app    = express()
+const app    = express.createServer()
 const server = !!process.env.PRODUCTION
-	? https.createServer( app, {
+	? http.createServer( app, {
 		certificate: fs.readFileSync( process.env.SSL_CERTIFICATE_PATH ).toString(),
 		key        : fs.readFileSync( process.env.SSL_PRIVATE_KEY_PATH ).toString()
 	} )
