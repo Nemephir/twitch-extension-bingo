@@ -18,6 +18,8 @@ try {
 		: http.createServer( app )
 	const io     = new SocketIo.Server( server )
 
+	console.log( server )
+
 	mongoose.connect( process.env.DB_URL, {
 		authSource        : 'admin',
 		user              : process.env.DB_USER,
@@ -30,6 +32,10 @@ try {
 		credentials: true,
 		origin     : `https://${process.env.TWITCH_EXTENSION_ID}.ext-twitch.tv`
 	} ) )
+
+	app.get('/', (req, res) => {
+		res.send('ok')
+	})
 
 	io.on( 'connection', async ( socket ) => {
 		socket.on( 'grid.load', ( channelId ) => loadGrid( socket, channelId ) )
