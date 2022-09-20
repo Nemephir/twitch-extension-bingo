@@ -40,13 +40,21 @@ app.use(cors({ credentials: true, origin: true }))
 // } )
 app.use( twitchextensioncsp( {
 	clientID  : process.env.TWITCH_EXTENSION_ID,
-	// scriptSrc : [
-	// 	'https://bingo.twitch.nemephir.com/socket.io/socket.io.js'
-	// ],
-	// connectSrc: [
-	// 	'https://bingo.twitch.nemephir.com'
-	// ]
+	scriptSrc : [
+		'https://bingo.twitch.nemephir.com'
+	],
+	connectSrc: [
+		'https://bingo.twitch.nemephir.com',
+		'wss://bingo.twitch.nemephir.com'
+	]
 } ) )
+
+app.post('/csp/', express.json({
+	type: 'application/csp-report'
+}), (req,res) => {
+	res.send('Ok');
+	console.log(req.body);
+});
 
 io.on( 'connection', async ( socket ) => {
 	socket.on( 'grid.load', ( channelId ) => loadGrid( socket, channelId ) )

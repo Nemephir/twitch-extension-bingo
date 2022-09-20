@@ -77,7 +77,7 @@
     "authorName": "Nemephir",
     "bitsEnabled": false,
     "canInstall": true,
-    "configUrl": "http://localhost:7402/config.html",
+    "configUrl": "https://m6mr8lnbvijofa412gbl7oai5c6unj.ext-twitch.tv/m6mr8lnbvijofa412gbl7oai5c6unj/0.0.1/949b19728ef55eee97299f88bd9b75fd/config.html",
     "configurationLocation": "none",
     "description": "The streamer creates his bingo grid. Among the options, it is possible to choose the size of the grid (between 2 and 5 squares), as well as the text content of each option.\nThe viewers have access, thanks to the plugin, to the bingo grid created by the streamer. As soon as the streamer checks or unchecks a option, the update is automatically done on the viewer page.\n\nThe data goes through an external server, not requiring registration. The data is secured by the streamer's Twitch channel ID, combined with the security of Twitch's extension framework; preventing the use of a bingo grid that does not belong to the right streamer, or blocking its modification by someone other than the streamer himself.",
     "eulaTosUrl": "",
@@ -90,7 +90,7 @@
     },
     "id": "m6mr8lnbvijofa412gbl7oai5c6unj",
     "installationCount": -42,
-    "liveConfigUrl": "http://localhost:7402/config.html",
+    "liveConfigUrl": "https://m6mr8lnbvijofa412gbl7oai5c6unj.ext-twitch.tv/m6mr8lnbvijofa412gbl7oai5c6unj/0.0.1/949b19728ef55eee97299f88bd9b75fd/config.html",
     "name": "Grille de Bingo personnalisable",
     "panelHeight": 0,
     "privacyPolicyUrl": "",
@@ -100,7 +100,7 @@
       "https://extensions-discovery-images.twitch.tv/m6mr8lnbvijofa412gbl7oai5c6unj/0.0.1/screenshot1c47cad0-d0c0-408c-8b91-130b79ec26c3"
     ],
     "sku": "",
-    "state": "Testing",
+    "state": "Assets Uploaded",
     "subscriptionsSupportLevel": "none",
     "summary": "Create a custom from 2x2 to 5x5 box bingo grid. Fill in the content of the boxes you want and share it with your viewers.",
     "supportEmail": "nemephir@gmail.com",
@@ -109,11 +109,11 @@
     "viewerSummary": "",
     "viewerUrl": "",
     "viewerUrls": {
-      "component": "http://localhost:7402/video_component.html"
+      "component": "https://m6mr8lnbvijofa412gbl7oai5c6unj.ext-twitch.tv/m6mr8lnbvijofa412gbl7oai5c6unj/0.0.1/949b19728ef55eee97299f88bd9b75fd/video_component.html"
     },
     "views": {
       "component": {
-        "viewerUrl": "http://localhost:7402/video_component.html",
+        "viewerUrl": "https://m6mr8lnbvijofa412gbl7oai5c6unj.ext-twitch.tv/m6mr8lnbvijofa412gbl7oai5c6unj/0.0.1/949b19728ef55eee97299f88bd9b75fd/video_component.html",
         "aspectWidth": 0,
         "aspectHeight": 0,
         "aspectRatioX": 100,
@@ -127,15 +127,17 @@
         "autoScale": true
       },
       "config": {
-        "viewerUrl": "http://localhost:7402/config.html",
-        "canLinkExternalContent": false
+        "viewerUrl": "https://m6mr8lnbvijofa412gbl7oai5c6unj.ext-twitch.tv/m6mr8lnbvijofa412gbl7oai5c6unj/0.0.1/949b19728ef55eee97299f88bd9b75fd/config.html",
+        "canLinkExternalContent": true
       },
       "liveConfig": {
-        "viewerUrl": "http://localhost:7402/config.html",
-        "canLinkExternalContent": false
+        "viewerUrl": "https://m6mr8lnbvijofa412gbl7oai5c6unj.ext-twitch.tv/m6mr8lnbvijofa412gbl7oai5c6unj/0.0.1/949b19728ef55eee97299f88bd9b75fd/config.html",
+        "canLinkExternalContent": true
       }
     },
-    "whitelistedConfigUrls": [],
+    "whitelistedConfigUrls": [
+      "https://bingo.twitch.nemephir.com/socket.io/socket.io.js"
+    ],
     "whitelistedPanelUrls": []
   },
   "frontendCommand": "",
