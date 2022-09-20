@@ -26,10 +26,9 @@ mongoose.connect( process.env.DB_URL, {
 	useUnifiedTopology: true
 } )
 
-// app.use( cors( {
-// 	credentials: true,
-// 	origin     : `https://${process.env.TWITCH_EXTENSION_ID}.ext-twitch.tv`
-// } ) )
+app.use( cors( {
+	origin     : `https://${process.env.TWITCH_EXTENSION_ID}.ext-twitch.tv`
+} ) )
 
 app.get( '/', ( req, res ) => {
 	res.send( 'ok' )
