@@ -5,9 +5,12 @@ const mongoose = require( 'mongoose' )
 const cors     = require( 'cors' )
 const express  = require( 'express' )
 const https    = require( 'https' )
+const http     = require( 'http' )
 const SocketIo = require( 'socket.io' )
 
 const Grid = require( './models/Grid' )
+
+console.log( 'PRODUCTION', process.env.PRODUCTION )
 
 const app    = express()
 const server = process.env.PRODUCTION
