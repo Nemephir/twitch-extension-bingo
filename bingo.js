@@ -2,16 +2,26 @@ require( 'dotenv' ).config()
 const fs = require( 'fs' )
 
 const mongoose           = require( 'mongoose' )
+const Sentry             = require( '@sentry/node' )
+const cors               = require( 'cors' )
 const express            = require( 'express' )
 const http               = require( 'http' )
+const https              = require( 'https' )
 const SocketIo           = require( 'socket.io' )
 const twitchextensioncsp = require( 'twitchextensioncsp' )
 
 const Grid = require( './models/Grid' )
 
 const app    = express()
-const server = http.createServer( app )
+const server = process.env.PRODUCTION
+	? https.createServer( app )
+	: http.createServer( app )
 const io     = new SocketIo.Server( server )
+
+// Sentry.init( {
+// 	dsn    : 'https://cb098d4aef4e4ce386fd5e630998314e@sentry.io/5166821',
+// 	enabled: ( process.env.NODE_ENV === 'production' )
+// } )
 
 mongoose.connect( process.env.DB_URL, {
 	authSource        : 'admin',
@@ -22,15 +32,21 @@ mongoose.connect( process.env.DB_URL, {
 } )
 
 app.use( express.static( 'public' ) )
-app.use(twitchextensioncsp({
-	clientID: 'm6mr8lnbvijofa412gbl7oai5c6unj',
-	scriptSrc: [
-		'https://bingo.twitch.nemephir.com/socket.io/socket.io.js'
-	],
-	connectSrc: [
-		'https://bingo.twitch.nemephir.com'
-	]
-}));
+// app.use( ( req, res, next ) => {
+// 	res.append( 'Access-Control-Allow-Origin', [ '*' ] )
+// 	res.append( 'Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE' )
+// 	res.append( 'Access-Control-Allow-Headers', 'Content-Type' )
+// 	next()
+// } )
+app.use( twitchextensioncsp( {
+	clientID  : process.env.TWITCH_EXTENSION_ID,
+	// scriptSrc : [
+	// 	'https://bingo.twitch.nemephir.com/socket.io/socket.io.js'
+	// ],
+	// connectSrc: [
+	// 	'https://bingo.twitch.nemephir.com'
+	// ]
+} ) )
 
 io.on( 'connection', async ( socket ) => {
 	socket.on( 'grid.load', ( channelId ) => loadGrid( socket, channelId ) )
