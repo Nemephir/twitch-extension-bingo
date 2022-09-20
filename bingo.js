@@ -10,10 +10,10 @@ const SocketIo = require( 'socket.io' )
 
 const Grid = require( './models/Grid' )
 
-console.log( 'PRODUCTION', process.env.PRODUCTION )
+console.log( 'PRODUCTION', !!process.env.PRODUCTION )
 
 const app    = express()
-const server = process.env.PRODUCTION
+const server = !!process.env.PRODUCTION
 	? https.createServer( app, {
 		certificate: fs.readFileSync( process.env.SSL_CERTIFICATE_PATH ).toString(),
 		key        : fs.readFileSync( process.env.SSL_PRIVATE_KEY_PATH ).toString()
