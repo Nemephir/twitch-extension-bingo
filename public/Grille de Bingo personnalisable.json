@@ -96,7 +96,9 @@
     "privacyPolicyUrl": "",
     "requestIdentityLink": false,
     "requiredBroadcasterAbilities": [],
-    "screenshotUrls": [],
+    "screenshotUrls": [
+      "https://extensions-discovery-images.twitch.tv/m6mr8lnbvijofa412gbl7oai5c6unj/0.0.1/screenshot1c47cad0-d0c0-408c-8b91-130b79ec26c3"
+    ],
     "sku": "",
     "state": "Testing",
     "subscriptionsSupportLevel": "none",

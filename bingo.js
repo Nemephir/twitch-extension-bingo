@@ -1,10 +1,11 @@
 require( 'dotenv' ).config()
 const fs = require( 'fs' )
 
-const mongoose = require( 'mongoose' )
-const express  = require( 'express' )
-const http     = require( 'http' )
-const SocketIo = require( 'socket.io' )
+const mongoose           = require( 'mongoose' )
+const express            = require( 'express' )
+const http               = require( 'http' )
+const SocketIo           = require( 'socket.io' )
+const twitchextensioncsp = require( 'twitchextensioncsp' )
 
 const Grid = require( './models/Grid' )
 
@@ -21,6 +22,9 @@ mongoose.connect( process.env.DB_URL, {
 } )
 
 app.use( express.static( 'public' ) )
+app.use(twitchextensioncsp({
+	clientID: 'm6mr8lnbvijofa412gbl7oai5c6unj'
+}));
 
 io.on( 'connection', async ( socket ) => {
 	socket.on( 'grid.load', ( channelId ) => loadGrid( socket, channelId ) )
@@ -48,12 +52,12 @@ const saveGrid = async ( socket, data ) => {
 		if( data.size )
 			one.size = Number( data.size )
 		if( data.moderator !== undefined )
-			one.moderator = !!data.moderator
+			one.moderator = !! data.moderator
 		if( data.cells )
 			one.cells = data.cells
 
 		await one.save()
-		io.to(data.channel).emit( 'grid', one.toObject() )
+		io.to( data.channel ).emit( 'grid', one.toObject() )
 	}
 }
 
@@ -63,6 +67,6 @@ const checkCell = async ( socket, gridId, channelId, cellNumber, checked ) => {
 		one.cells[cellNumber].checked = checked
 		await one.save()
 		console.log( socket.broadcast )
-		io.to(channelId).emit( 'grid', one.toObject() )
+		io.to( channelId ).emit( 'grid', one.toObject() )
 	}
 }
