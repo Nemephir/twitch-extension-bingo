@@ -33,10 +33,14 @@ mongoose.connect( process.env.DB_URL, {
 
 app.use( express.static( 'public' ) )
 // app.use(Sentry.Handlers.requestHandler())
-app.use(cors({ credentials: true, origin: true }))
+app.use( cors( {
+	credentials: true, origin: [
+		`https://${process.env.TWITCH_EXTENSION_ID}.ext-twitch.tv`
+	]
+} ) )
 // app.use( ( req, res, next ) => {
-	// res.append( 'Content-Security-Policy', `script-src ${process.env.TWITCH_EXTENSION_HASH}'` )
-	// next()
+// res.append( 'Content-Security-Policy', `script-src ${process.env.TWITCH_EXTENSION_HASH}'` )
+// next()
 // } )
 app.use( twitchextensioncsp( {
 	clientID  : process.env.TWITCH_EXTENSION_ID,
@@ -49,12 +53,12 @@ app.use( twitchextensioncsp( {
 	]
 } ) )
 
-app.post('/csp/', express.json({
+app.post( '/csp/', express.json( {
 	type: 'application/csp-report'
-}), (req,res) => {
-	res.send('Ok');
-	console.log(req.body);
-});
+} ), ( req, res ) => {
+	res.send( 'Ok' )
+	console.log( req.body )
+} )
 
 io.on( 'connection', async ( socket ) => {
 	socket.on( 'grid.load', ( channelId ) => loadGrid( socket, channelId ) )
