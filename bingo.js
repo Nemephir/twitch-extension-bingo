@@ -1,14 +1,11 @@
 require( 'dotenv' ).config()
 const fs = require( 'fs' )
 
-const mongoose           = require( 'mongoose' )
-const Sentry             = require( '@sentry/node' )
-const cors               = require( 'cors' )
-const express            = require( 'express' )
-const http               = require( 'http' )
-const https              = require( 'https' )
-const SocketIo           = require( 'socket.io' )
-const twitchextensioncsp = require( 'twitchextensioncsp' )
+const mongoose = require( 'mongoose' )
+const cors     = require( 'cors' )
+const express  = require( 'express' )
+const https    = require( 'https' )
+const SocketIo = require( 'socket.io' )
 
 const Grid = require( './models/Grid' )
 
@@ -18,11 +15,6 @@ const server = process.env.PRODUCTION
 	: http.createServer( app )
 const io     = new SocketIo.Server( server )
 
-// Sentry.init( {
-// 	dsn    : 'https://cb098d4aef4e4ce386fd5e630998314e@sentry.io/5166821',
-// 	enabled: ( process.env.NODE_ENV === 'production' )
-// } )
-
 mongoose.connect( process.env.DB_URL, {
 	authSource        : 'admin',
 	user              : process.env.DB_USER,
@@ -31,27 +23,12 @@ mongoose.connect( process.env.DB_URL, {
 	useUnifiedTopology: true
 } )
 
-app.use( express.static( 'public' ) )
-// app.use(Sentry.Handlers.requestHandler())
 app.use( cors( {
-	credentials: true, origin: [
-		`https://${process.env.TWITCH_EXTENSION_ID}.ext-twitch.tv`
-	]
+	credentials: true,
+	origin     : `https://${process.env.TWITCH_EXTENSION_ID}.ext-twitch.tv`
 } ) )
-// app.use( ( req, res, next ) => {
-// res.append( 'Content-Security-Policy', `script-src ${process.env.TWITCH_EXTENSION_HASH}'` )
-// next()
-// } )
-app.use( twitchextensioncsp( {
-	clientID  : process.env.TWITCH_EXTENSION_ID,
-	scriptSrc : [
-		'https://bingo.twitch.nemephir.com'
-	],
-	connectSrc: [
-		'https://bingo.twitch.nemephir.com',
-		'wss://bingo.twitch.nemephir.com'
-	]
-} ) )
+
+app.use( express.static( 'public' ) )
 
 app.post( '/csp/', express.json( {
 	type: 'application/csp-report'
