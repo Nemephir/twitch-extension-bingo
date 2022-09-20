@@ -49,6 +49,12 @@ app.get( '/', ( req, res ) => {
 	res.send( 'ok' )
 } )
 
+server.listen( Number( process.env.PORT ), ( err ) => {
+	if( err ) console.log( err )
+	else console.log( `Listen on  port ${process.env.PORT}` )
+	console.log( server )
+} )
+
 io.on( 'connection', async ( socket ) => {
 	socket.on( 'grid.load', ( channelId ) => loadGrid( socket, channelId ) )
 	socket.on( 'grid.save', ( data ) => saveGrid( socket, data ) )
@@ -56,11 +62,6 @@ io.on( 'connection', async ( socket ) => {
 		'grid.check',
 		( gridId, channelId, cellNumber, checked ) => checkCell( socket, gridId, channelId, cellNumber, checked )
 	)
-} )
-
-server.listen( Number( process.env.PORT ), ( err ) => {
-	if( err ) console.log( err )
-	else console.log( `Listen on  port ${process.env.PORT}` )
 } )
 
 const loadGrid = async ( socket, channelId ) => {
