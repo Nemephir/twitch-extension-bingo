@@ -12,12 +12,11 @@ const Grid = require( './models/Grid' )
 
 console.log( 'PRODUCTION', !!process.env.PRODUCTION )
 
-// https://stackoverflow.com/questions/31156884/how-to-use-https-on-node-js-using-express-socket-io
 const app    = express()
 const server = !!process.env.PRODUCTION
 	? https.createServer( {
-		cert: fs.readFileSync( './file.crt' ).toString(),
-		key : fs.readFileSync( './file.pem' ).toString()
+		cert: fs.readFileSync( process.env.SSL_CERTIFICATE_PATH ).toString(),
+		key : fs.readFileSync( process.env.SSL_PRIVATE_KEY_PATH ).toString()
 	}, app )
 	: http.createServer( app )
 const io     = new SocketIo.Server( server )
