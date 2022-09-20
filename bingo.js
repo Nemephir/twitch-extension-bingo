@@ -2,7 +2,7 @@ require( 'dotenv' ).config()
 const fs = require( 'fs' )
 
 const mongoose = require( 'mongoose' )
-// const cors     = require( 'cors' )
+const cors     = require( 'cors' )
 const express  = require( 'express' )
 const https    = require( 'https' )
 const http     = require( 'http' )
@@ -26,9 +26,21 @@ mongoose.connect( process.env.DB_URL, {
 	useUnifiedTopology: true
 } )
 
-// app.use( cors( {
-// 	origin     : `https://${process.env.TWITCH_EXTENSION_ID}.ext-twitch.tv`
-// } ) )
+const allowedOrigins = [ `https://${process.env.TWITCH_EXTENSION_ID}.ext-twitch.tv` ]
+console.log( allowedOrigins )
+app.use( cors( {
+	origin: function( origin, callback ) {
+		// allow requests with no origin 
+		// (like mobile apps or curl requests)
+		if( ! origin ) return callback( null, true )
+		if( allowedOrigins.indexOf( origin ) === -1 ) {
+			var msg = 'The CORS policy for this site does not ' +
+				'allow access from the specified Origin.'
+			return callback( new Error( msg ), false )
+		}
+		return callback( null, true )
+	}
+} ) )
 
 app.get( '/', ( req, res ) => {
 	res.send( 'ok' )
@@ -43,8 +55,8 @@ io.on( 'connection', async ( socket ) => {
 	)
 } )
 
-server.listen( Number( process.env.PORT ), (err) => {
-	if( err ) console.log(err)
+server.listen( Number( process.env.PORT ), ( err ) => {
+	if( err ) console.log( err )
 	else console.log( `Listen on  port ${process.env.PORT}` )
 } )
 
