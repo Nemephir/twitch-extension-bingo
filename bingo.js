@@ -34,10 +34,10 @@ mongoose.connect( process.env.DB_URL, {
 app.use( express.static( 'public' ) )
 // app.use(Sentry.Handlers.requestHandler())
 app.use(cors({ credentials: true, origin: true }))
-app.use( ( req, res, next ) => {
-	res.append( 'Content-Security-Policy', `unsafe-inline '${process.env.TWITCH_EXTENSION_HASH}'` )
-	next()
-} )
+// app.use( ( req, res, next ) => {
+	// res.append( 'Content-Security-Policy', `script-src ${process.env.TWITCH_EXTENSION_HASH}'` )
+	// next()
+// } )
 app.use( twitchextensioncsp( {
 	clientID  : process.env.TWITCH_EXTENSION_ID,
 	// scriptSrc : [
