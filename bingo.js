@@ -31,15 +31,6 @@ app.use( cors( {
 	origin     : `https://${process.env.TWITCH_EXTENSION_ID}.ext-twitch.tv`
 } ) )
 
-app.use( express.static( 'public' ) )
-
-app.post( '/csp/', express.json( {
-	type: 'application/csp-report'
-} ), ( req, res ) => {
-	res.send( 'Ok' )
-	console.log( req.body )
-} )
-
 io.on( 'connection', async ( socket ) => {
 	socket.on( 'grid.load', ( channelId ) => loadGrid( socket, channelId ) )
 	socket.on( 'grid.save', ( data ) => saveGrid( socket, data ) )
