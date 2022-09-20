@@ -14,7 +14,10 @@ console.log( 'PRODUCTION', process.env.PRODUCTION )
 
 const app    = express()
 const server = process.env.PRODUCTION
-	? https.createServer( app )
+	? https.createServer( app, {
+		certificate: fs.readFileSync( process.env.SSL_CERTIFICATE_PATH ).toString(),
+		key        : fs.readFileSync( process.env.SSL_PRIVATE_KEY_PATH ).toString()
+	} )
 	: http.createServer( app )
 const io     = new SocketIo.Server( server )
 
@@ -55,7 +58,7 @@ io.on( 'connection', async ( socket ) => {
 	)
 } )
 
-app.listen( Number( process.env.PORT ), ( err ) => {
+server.listen( Number( process.env.PORT ), ( err ) => {
 	if( err ) console.log( err )
 	else console.log( `Listen on  port ${process.env.PORT}` )
 } )
